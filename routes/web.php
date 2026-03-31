@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
 Route::get('/', function () {
     return view('welcome');
@@ -16,4 +17,13 @@ Route::get('/posts', function () {
         ['id'=>6,'title'=>'post 6','body'=>'content 6']
     ];
     return view('posts.index',compact('posts'));
+});
+
+Route::get('/posts/create', function () {
+    return view('posts.create');
+});
+
+Route::post('/posts', function (Request $request) {
+    $newPost=['id'=>rand(100,999),'title'=>$request->title, 'body'=>$request->body];
+    return redirect('/posts');
 });
