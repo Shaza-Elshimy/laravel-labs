@@ -54,4 +54,4 @@ Route::get('/posts/{id}', function ($id) {
         }
     }
     return view('posts.show',compact('post'));
-});
+})->where('id','[0-9]+');
