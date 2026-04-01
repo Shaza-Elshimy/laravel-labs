@@ -61,8 +61,14 @@ function edit($id) {
     return view('posts.edit',compact('post'));
 }
 function update($id,Request $request) {
-    // $post=['id'=>rand(100,999),'title'=>$request->title, 'body'=>$request->body];
+    //edit in database
     return redirect('/posts');
 }
+
+function destroy($id) {
+  //delete from database
+    return redirect('/posts');
+}
+
 
 }

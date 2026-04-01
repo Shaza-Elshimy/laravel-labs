@@ -18,3 +18,5 @@ Route::get('/posts/{id}', [PostController::class,"show"])->where('id','[0-9]+');
 Route::get('/posts/{id}/edit', [PostController::class,"edit"]);
 
 Route::put('/posts/{id}', [PostController::class,"update"]);
+
+Route::delete('/posts/{id}',[PostController::class,"destroy"]);
