@@ -16,12 +16,19 @@
                 {{ $post['body'] }}
             </p>
 
+            <button type="submit" class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-red-600">
+                <a href="/posts/{{$post['id']}}">View</a>
+            </button>
+
+            <button type="submit" class="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-red-600">
+                <a href="/posts/{{$post['id']}}/edit">Edit</a>
+            </button>
 
             <form 
                 method="POST" 
                 action="/posts/{{ $post['id'] }}"
                 onsubmit="return confirm('Are you sure you want to delete this post?')"
-                class="mt-4"
+                class="mt-4 inline"
             >
                 @csrf
                 @method('DELETE')
@@ -33,6 +40,7 @@
                     Delete
                 </button>
             </form>
+
 
         </div>
     @endforeach
