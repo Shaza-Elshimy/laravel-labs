@@ -20,3 +20,5 @@ Route::get('/posts/{id}/edit', [PostController::class,"edit"]);
 Route::put('/posts/{id}', [PostController::class,"update"]);
 
 Route::delete('/posts/{id}',[PostController::class,"destroy"]);
+
+Route::post('/posts/{id}/restore', [PostController::class,"restore"]);

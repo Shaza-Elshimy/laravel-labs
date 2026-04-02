@@ -17,12 +17,14 @@ use App\Models\Post;
 use App\Models\User;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
+use Illuminate\Database\Eloquent\SoftDeletes;
 class PostController extends Controller
 {
     function index() {
     $posts = Post::with('user')->paginate(10);
+    $deletedPosts = Post::onlyTrashed()->get();
 
-    return view('posts.index',compact('posts'));
+    return view('posts.index',compact('posts','deletedPosts'));
 }
 
 
@@ -74,5 +76,9 @@ function destroy($id) {
     return redirect('/posts');
 }
 
+function restore($id) {
+    Post::onlyTrashed()->find($id)->restore();
+    return redirect('/posts');
 
+}
 }

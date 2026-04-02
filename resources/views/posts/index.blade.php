@@ -55,3 +55,43 @@
     Create post
 </a>    
 </div>
+<br>
+<div>
+    <h2 class="text-center text-3xl text-red-700 mt-8">Deleted Posts</h2>
+
+    @foreach($deletedPosts as $post)
+        <div class="border-2 border-black bg-white p-4 shadow-[4px_4px_0_0] sm:p-6 m-4">
+
+            <h2 class="text-2xl font-semibold text-gray-500 line-through">
+                {{ $post['title'] }}
+            </h2>
+
+            <p class="mt-2 text-gray-600 line-through">
+                {{ $post['body'] }}
+            </p>
+            <p class="mt-2 text-sm text-gray-500 line-through">
+                By : {{ $post->user->name }}
+            </p>
+            <p class="mt-2 text-sm text-gray-500 line-through">
+                created at : {{ $post->created_at->format('M d, Y') }}
+            </p>
+            <br>
+
+            <form 
+                method="POST" 
+                action="/posts/{{ $post['id'] }}/restore"
+                onsubmit="return confirm('Are you sure you want to restore this post?')"
+                class="mt-4 inline"
+            >
+                @csrf
+
+                <button 
+                    type="submit"
+                    class="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600"
+                >
+                    Restore
+                </button>
+            </form>
+            
+        </div>
+    @endforeach
