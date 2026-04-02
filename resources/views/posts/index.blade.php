@@ -16,8 +16,12 @@
                 {{ $post['body'] }}
             </p>
             <p class="mt-2 text-sm text-gray-500">
-                By {{ $post->user->name }}
+                By : {{ $post->user->name }}
             </p>
+            <p class="mt-2 text-sm text-gray-500">
+                created at : {{ $post->created_at->format('M d, Y') }}
+            </p>
+            <br>
 
             <button type="submit" class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-red-600">
                 <a href="/posts/{{$post['id']}}">View</a>

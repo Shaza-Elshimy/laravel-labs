@@ -12,6 +12,9 @@
       <p class="mt-2 text-sm text-gray-500">
                 By {{ $post->user->name }}
       </p>
+      <p class="mt-2 text-sm text-gray-500">
+        created at : {{ $post->created_at->format('M d, Y') }}
+      </p>
     </div>
   </div>
 </div>
