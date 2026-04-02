@@ -48,7 +48,7 @@ function store(StorePostRequest $request) {
 }
 
 function show($id) {
-    $post = Post::find($id);
+    $post = Post::with('comments')->find($id);
     $users = User::all();
 
     return view('posts.show',compact('post','users'));
@@ -80,5 +80,13 @@ function restore($id) {
     Post::onlyTrashed()->find($id)->restore();
     return redirect('/posts');
 
+}
+
+function addComment($id,Request $request){
+    $post = Post::find($id);
+    $post->comments()->create([
+        'body' => $request->body
+    ]);
+    return redirect("/posts/$id");
 }
 }

@@ -22,3 +22,5 @@ Route::put('/posts/{id}', [PostController::class,"update"]);
 Route::delete('/posts/{id}',[PostController::class,"destroy"]);
 
 Route::post('/posts/{id}/restore', [PostController::class,"restore"]);
+
+Route::post('/posts/{id}/comments', [PostController::class,"addComment"]);
