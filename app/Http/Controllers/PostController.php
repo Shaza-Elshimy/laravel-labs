@@ -43,16 +43,21 @@ function show($id) {
 }
 
 function edit($id) {
-    $post=['id'=>$id,'title'=>'title'.$id, 'body'=>'body'.$id];
+    $post=Post::find($id);
     return view('posts.edit',compact('post'));
 }
 function update($id,Request $request) {
-    //edit in database
+    //update in database
+    $post=Post::find($id);
+    $post->title=$request->title;
+    $post->body=$request->body;
+    $post->save();
     return redirect('/posts');
 }
 
 function destroy($id) {
   //delete from database
+    Post::destroy($id);
     return redirect('/posts');
 }
 

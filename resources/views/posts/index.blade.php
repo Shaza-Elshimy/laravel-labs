@@ -40,8 +40,10 @@
                     Delete
                 </button>
             </form>
-
-
+            
         </div>
     @endforeach
+<a href="/posts/create" class="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600 m-auto block w-max">
+    Create post
+</a>    
 </div>
