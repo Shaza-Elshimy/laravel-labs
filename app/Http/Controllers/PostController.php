@@ -12,10 +12,11 @@
 //     ['id'=>10,'title'=>'Future Steps','body'=>'Moving from arrays to database and models'],
 // ]
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\User;
+use App\Http\Requests\StorePostRequest;
+use App\Http\Requests\UpdatePostRequest;
 class PostController extends Controller
 {
     function index() {
@@ -31,12 +32,15 @@ function create() {
     return view('posts.create', compact('users'));
 }
 
-function store(Request $request) {
+
+
+function store(StorePostRequest $request) {
     Post::create([
         "title"=>$request->title,
         "body"=>$request->body,
         "user_id"=>$request->user_id
     ]);
+
 
     return redirect('/posts');
 }
@@ -53,7 +57,8 @@ function edit($id) {
     $users = User::all();
     return view('posts.edit',compact('post','users'));
 }
-function update($id,Request $request) {
+
+function update($id,UpdatePostRequest $request) {
     //update in database
     $post=Post::find($id);
     $post->title=$request->title;
