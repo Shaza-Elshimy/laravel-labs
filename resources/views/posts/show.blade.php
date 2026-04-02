@@ -9,6 +9,9 @@
       <p class="text-pretty text-gray-700">
         {{$post['body']}}
       </p>
+      <p class="mt-2 text-sm text-gray-500">
+                By {{ $post->user->name }}
+      </p>
     </div>
   </div>
 </div>

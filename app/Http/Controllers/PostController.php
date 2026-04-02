@@ -43,19 +43,22 @@ function store(Request $request) {
 
 function show($id) {
     $post = Post::find($id);
+    $users = User::all();
 
-    return view('posts.show',compact('post'));
+    return view('posts.show',compact('post','users'));
 }
 
 function edit($id) {
     $post=Post::find($id);
-    return view('posts.edit',compact('post'));
+    $users = User::all();
+    return view('posts.edit',compact('post','users'));
 }
 function update($id,Request $request) {
     //update in database
     $post=Post::find($id);
     $post->title=$request->title;
     $post->body=$request->body;
+    $post->user_id=$request->user_id;
     $post->save();
     return redirect('/posts');
 }
