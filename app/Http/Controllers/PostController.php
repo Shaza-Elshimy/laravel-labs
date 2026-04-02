@@ -20,7 +20,7 @@ use App\Http\Requests\UpdatePostRequest;
 class PostController extends Controller
 {
     function index() {
-    $posts = Post::all();
+    $posts = Post::with('user')->paginate(10);
 
     return view('posts.index',compact('posts'));
 }
