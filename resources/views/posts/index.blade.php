@@ -98,6 +98,21 @@
                     Restore
                 </button>
             </form>
+            <form 
+                method="POST" 
+                action="{{ route('posts.forceDelete', $post) }}"
+                onsubmit="return confirm('Are you sure you want to permanently delete this post?')"
+                class="mt-4 inline"
+            >
+                @csrf
+                @method('DELETE')   
+                <button 
+                    type="submit"
+                    class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
+                >
+                    Force Delete
+                </button>
+            </form>
             
         </div>
     @endforeach

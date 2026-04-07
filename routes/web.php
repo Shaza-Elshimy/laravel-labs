@@ -25,3 +25,7 @@ Route::post('/posts/{post}/restore', [PostController::class, 'restore'])
     ->middleware('auth');
 
 Route::resource('posts', PostController::class)->middleware('auth');
+
+Route::delete('/posts/{post}/force-delete', [PostController::class, 'forceDelete'])
+    ->name('posts.forceDelete')
+    ->middleware('auth');

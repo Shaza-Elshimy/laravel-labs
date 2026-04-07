@@ -87,6 +87,11 @@ function restore($id) {
 
 }
 
+function forceDelete($id) {
+    Post::onlyTrashed()->find($id)->forceDelete();
+    return redirect('/posts');
+}
+
 function addComment($id,Request $request){
     $post = Post::find($id);
     $post->comments()->create([
