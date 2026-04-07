@@ -40,6 +40,7 @@ function store(StorePostRequest $request) {
     Post::create([
         "title"=>$request->title,
         "body"=>$request->body,
+        "image" => $request->hasFile('image') ? $request->file('image')->store('images', 'public') : null,
         // "user_id"=>$request->user_id
         "user_id"=>auth()->id()
     ]);
@@ -66,6 +67,7 @@ function update($id,UpdatePostRequest $request) {
     $post=Post::find($id);
     $post->title=$request->title;
     $post->body=$request->body;
+    $post->image = $request->hasFile('image') ? $request->file('image')->store('images', 'public') : $post->image;
     $post->user_id=auth()->id();
     // $post->user_id=$request->user_id;
 

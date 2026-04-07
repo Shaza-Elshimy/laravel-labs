@@ -20,4 +20,8 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
+Route::post('/posts/{post}/restore', [PostController::class, 'restore'])
+    ->name('posts.restore')
+    ->middleware('auth');
+
 Route::resource('posts', PostController::class)->middleware('auth');

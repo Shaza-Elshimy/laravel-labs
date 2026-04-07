@@ -6,6 +6,9 @@
     @foreach($posts as $post)
         <div class="border-2 border-black bg-white p-4 shadow-[4px_4px_0_0] sm:p-6 m-4">
 
+            @if($post->image)
+                <img src="{{ asset('storage/' . $post->image) }}" alt="Post Image" class="w-[200px] h-auto mb-4 rounded">
+            @endif
             <a href="/posts/{{ $post['id'] }}">
                 <h2 class="text-2xl font-semibold hover:text-orange-600">
                     {{ $post['title'] }}
@@ -61,6 +64,9 @@
 
     @foreach($deletedPosts as $post)
         <div class="border-2 border-black bg-white p-4 shadow-[4px_4px_0_0] sm:p-6 m-4">
+            @if($post->image)
+                <img src="{{ asset('storage/' . $post->image) }}" alt="Post Image" class="w-[200px] h-auto mb-4 rounded">
+            @endif
 
             <h2 class="text-2xl font-semibold text-gray-500 line-through">
                 {{ $post['title'] }}
@@ -79,7 +85,7 @@
 
             <form 
                 method="POST" 
-                action="/posts/{{ $post['id'] }}/restore"
+                action="{{ route('posts.restore', $post) }}"
                 onsubmit="return confirm('Are you sure you want to restore this post?')"
                 class="mt-4 inline"
             >
