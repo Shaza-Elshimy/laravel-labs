@@ -3,6 +3,10 @@
     <div class="fixed inset-0 z-50 grid place-content-center bg-black/50 p-4" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
   <div class="w-full max-w-md rounded-lg bg-white p-6 shadow-lg">
 
+    @if($post->image)
+                <img src="{{ asset('storage/' . $post->image) }}" alt="Post Image" class="w-[200px] h-auto mb-4 rounded">
+    @endif
+
     <h2 id="modalTitle" class="text-xl font-bold text-gray-900 sm:text-2xl">{{$post['title']}}</h2>
 
     <div class="mt-4">
@@ -22,7 +26,7 @@
         </div>
       @endforeach
     </div>
-    <form method="POST" action="/posts/{{ $post['id'] }}/comments" class="mt-4">
+    <form method="POST" action="{{ route('posts.comments.store', $post) }}" class="mt-4">
         @csrf
         <textarea name="body" rows="3" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Add a comment..."></textarea>
         <button type="submit" class="mt-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-200">Submit Comment</button>
