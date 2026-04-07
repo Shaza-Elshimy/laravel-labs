@@ -26,7 +26,7 @@ class UpdatePostRequest extends FormRequest
             //
             'title' => 'required|string|min:3|unique:posts,title,' . $this->route('id'),
             'body' => 'required|min:10',
-            'user_id' => 'required|exists:users,id'
+            // 'user_id' => 'required|exists:users,id'
         ];
     }
 }

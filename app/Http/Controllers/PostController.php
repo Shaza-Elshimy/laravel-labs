@@ -40,7 +40,8 @@ function store(StorePostRequest $request) {
     Post::create([
         "title"=>$request->title,
         "body"=>$request->body,
-        "user_id"=>$request->user_id
+        // "user_id"=>$request->user_id
+        "user_id"=>auth()->id()
     ]);
 
 
@@ -65,7 +66,9 @@ function update($id,UpdatePostRequest $request) {
     $post=Post::find($id);
     $post->title=$request->title;
     $post->body=$request->body;
-    $post->user_id=$request->user_id;
+    $post->user_id=auth()->id();
+    // $post->user_id=$request->user_id;
+
     $post->save();
     return redirect('/posts');
 }
