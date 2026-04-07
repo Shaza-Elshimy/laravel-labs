@@ -18,6 +18,7 @@ use App\Models\User;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Storage;
 class PostController extends Controller
 {
     function index() {
@@ -88,7 +89,13 @@ function restore($id) {
 }
 
 function forceDelete($id) {
-    Post::onlyTrashed()->find($id)->forceDelete();
+
+    $post = Post::onlyTrashed()->findorFail($id);
+    if($post->image){
+        Storage::disk('public')->delete($post->image);
+    }
+    $post->forceDelete();
+    
     return redirect('/posts');
 }
 
