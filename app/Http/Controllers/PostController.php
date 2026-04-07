@@ -68,7 +68,12 @@ function update($id,UpdatePostRequest $request) {
     $post=Post::find($id);
     $post->title=$request->title;
     $post->body=$request->body;
-    $post->image = $request->hasFile('image') ? $request->file('image')->store('images', 'public') : $post->image;
+    if($request->hasFile('image')){
+        if($post->image){
+            Storage::disk('public')->delete($post->image);
+        }
+        $post->image = $request->file('image')->store('images', 'public');
+    }
     $post->user_id=auth()->id();
     // $post->user_id=$request->user_id;
 
