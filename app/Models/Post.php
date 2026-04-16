@@ -8,7 +8,7 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\SoftDeletes;
 class Post extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes,slaggable;
     //
     protected $fillable = ['title', 'body', 'user_id', 'image'];
 
@@ -19,4 +19,10 @@ public function comments(){
     return $this->morphMany(Comment::class,'commentable');
 }
 
+public function slaggable(): array
+    {
+        return [
+            'slug' => 'title',
+        ];
+    }
 }

@@ -11,7 +11,8 @@ class PostController extends Controller
 {
     //
     function index() {
-        $posts=Post::all();
+        // $posts=Post::all();
+        $posts = Post::with('user')->paginate(10);
 
     return PostResource::collection($posts);
     }
@@ -24,6 +25,12 @@ class PostController extends Controller
 }
 
 function store(Request $request) {
+    $validatedData = $request->validate([
+        'title' => 'required|string|max:255',
+        'body' => 'required|string',
+        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        'user_id' => 'required|exists:users,id'
+    ]);
     Post::create([
         "title"=>$request->title,
         "body"=>$request->body,
@@ -37,6 +44,11 @@ function store(Request $request) {
 
 
 function update($id,Request $request) {
+    $validatedData = $request->validate([
+        'title' => 'required|string|max:255',
+        'body' => 'required|string',
+        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+    ]);
     //update in database
     $post=Post::find($id);
     $post->title=$request->title;
