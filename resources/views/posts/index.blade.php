@@ -14,6 +14,7 @@
                     {{ $post['title'] }}
                 </h2>
             </a>
+            <p>Slug:{{$post->slug}}</p>
 
             <p class="mt-2 text-gray-600">
                 {{ $post['body'] }}

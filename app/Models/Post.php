@@ -6,9 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\User;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Cviebrock\EloquentSluggable\Sluggable;
 class Post extends Model
 {
-    use HasFactory, SoftDeletes,slaggable;
+    use HasFactory, SoftDeletes,Sluggable;
     //
     protected $fillable = ['title', 'body', 'user_id', 'image'];
 
@@ -19,10 +20,12 @@ public function comments(){
     return $this->morphMany(Comment::class,'commentable');
 }
 
-public function slaggable(): array
+public function sluggable(): array
     {
         return [
-            'slug' => 'title',
+            'slug' => [
+                'source' => 'title'
+            ]
         ];
     }
 }
