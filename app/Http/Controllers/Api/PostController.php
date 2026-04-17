@@ -19,7 +19,10 @@ class PostController extends Controller
 
 
     function show($id) {
-    $post = Post::with('comments')->find($id);
+    $post = Post::with('user')->find($id);
+    if (!$post) {
+        return response()->json(['message' => 'Post not found'], 404);
+    }
 
     return new PostResource($post);
 }
